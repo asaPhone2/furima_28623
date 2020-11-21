@@ -27,40 +27,41 @@ Things you may want to cover:
 
 ## users テーブル
 
-| Column           | Type   | Options     |
-| ---------------- | ------ | ----------- |
-| nickname         | string | null: false |
-| email            | string | null: false |
-| password         | string | null: false |
-| first_name       | string | null: false |
-| family_name      | string | null: false |
-| first_name_kana  | string | null: false |
-| family_name_kana | string | null: false |
-| birth_day        | string | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| first_name         | string | null: false |
+| family_name        | string | null: false |
+| first_name_kana    | string | null: false |
+| family_name_kana   | string | null: false |
+| birth_day          | date   | null: false |
 
 ### Association
 
 - has_many :items
-- has_one :purchase_historys
+- has_many :purchase_histories
 - has_many :sending_destinations
 
 
 ## items テーブル
 
-| Column           | Type       | Options     |
-| ---------------- | ---------- | ----------- |
-| name             | string     | null: false |
-| introduction     | text       | null: false |
-| price            | integer    | null: false |
-| item_condition   | references | null: false ,foreign_key: true|
-| category         | references | null: false ,foreign_key: true|
-| delivery_fee     | references | null: false ,foreign_key: true|
-| preparetion_day  | references | null: false ,foreign_key: true|
-| trading_states   | enum       | null: false |
+| Column              | Type    | Options     |
+| ------------------- | ------- | ----------- |
+| name                | string  | null: false |
+| introduction        | text    | null: false |
+| price_id            | integer | null: false |
+| item_condition_id   | integer | null: false ,foreign_key: true|
+| category_id         | integer | null: false ,foreign_key: true|
+| delivery_fee_id     | integer | null: false ,foreign_key: true|
+| preparetion_day_id  | integer | null: false ,foreign_key: true|
+| trading_states_id   | integer | null: false |
+| user                | references | null: false ,foreign_key: true|
 
 ### Association
-- belongs_to :users
-- has_one :purchase_historys
+- belongs_to :user
+- has_one :purchase_history
 
 ## purchase_histry テーブル
 
@@ -70,23 +71,22 @@ Things you may want to cover:
 | item   | references | null: false ,foreign_key: true|
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- has_one : senging_destinations
+- belongs_to :user
+- belongs_to :item
+- has_one : senging_destination
 
 
 ### sending_destinations テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| post_code       | string     | null: false |
-| prefecture_code | integer    | null: false |
-| city            | string     | null: false |
-| house_number    | string     | null: false |
-| bilding_number  | string     |             |
-| phone_number    | string     | null: false |
-| user            | references | null: false ,foreign_key: true|
+| Column             | Type       | Options     |
+| ------------------ | ---------- | ----------- |
+| post_code          | string     | null: false |
+| prefecture_code    | integer    | null: false |
+| city               | string     | null: false |
+| house_number       | string     | null: false |
+| bilding_number     | string     |             |
+| phone_number       | string     | null: false |
+| purchase_history | references | null: false ,foreign_key: true|
 
 ### Association
-- belongs_to :users
-- belongs_to ::purchase_historys
+- belongs_to ::purchase_history
