@@ -42,7 +42,6 @@ Things you may want to cover:
 
 - has_many :items
 - has_many :purchase_histories
-- has_many :sending_destinations
 
 
 ## items テーブル
@@ -56,7 +55,7 @@ Things you may want to cover:
 | category_id         | integer | null: false |
 | delivery_fee_id     | integer | null: false |
 | preparetion_day_id  | integer | null: false |
-| trading_states_id   | integer | null: false |
+| trading_state_id   | integer | null: false |
 | user                | references | null: false ,foreign_key: true|
 
 ### Association
@@ -89,4 +88,4 @@ Things you may want to cover:
 | purchase_history      | references | null: false ,foreign_key: true|
 
 ### Association
-- belongs_to ::purchase_history
+- belongs_to :purchase_history
