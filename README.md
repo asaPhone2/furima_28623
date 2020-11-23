@@ -55,7 +55,7 @@ Things you may want to cover:
 | category_id         | integer | null: false |
 | delivery_fee_id     | integer | null: false |
 | preparetion_day_id  | integer | null: false |
-| trading_state_id   | integer | null: false |
+| prefecture_code_id  | integer | null: false |
 | user                | references | null: false ,foreign_key: true|
 
 ### Association
