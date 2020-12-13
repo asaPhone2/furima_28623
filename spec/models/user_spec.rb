@@ -43,8 +43,8 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('名前を入力してください')
       end
 
-      it 'last_nameがない場合は登録できないこと' do
-        @user.last_name = ''
+      it 'family_nameがない場合は登録できないこと' do
+        @user.family_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include('苗字を入力してください')
       end
@@ -55,8 +55,8 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('名前カナを入力してください')
       end
 
-      it 'last_name_kanaがない場合は登録できないこと' do
-        @user.last_name_kana = ''
+      it 'family_name_kanaがない場合は登録できないこと' do
+        @user.family_name_kana = ''
         @user.valid?
         expect(@user.errors.full_messages).to include('苗字カナを入力してください')
       end
@@ -81,12 +81,34 @@ RSpec.describe User, type: :model do
         expect(another_user.errors.full_messages).to include('Eメールはすでに存在します')
       end
 
-      it ' passwordが5文字以下であれば登録できないこと ' do
+      it ' passwordが5文字以下であれば登録できない' do
         @user.password = '12345'
         @user.password_confirmation = '12345'
         @user.valid?
         expect(@user.errors.full_messages).to include('パスワードは6文字以上で入力してください')
       end
+
+      it "passwordが数字のみの場合は登録できない" do
+        @user.password = '1234567'
+        @user.password_confirmation = '1234567'
+        @ser.valid?
+        expect(@user.errors.full_messages).to include('パスワードは英数字混合で入力してください')
+      end
+  
+      it "passwordが英文字のみの場合は登録できない" do
+        @user.password = 'abcdefg'
+        @user.password_confirmation = 'abcdefg'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('パスワードは英数字混合で入力してください')
+      end
+
+      it "first_name、family_name、first_name_kana、family_name_kanaが数字を含む場合登録できない" do
+        @user.first_name = '123'
+        @user.family_name = '123'
+        @user.first_name_kana = '123'
+        @user.family_name_kana = '123'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('名前は漢字、平仮名、カタカナのみで、振り仮名は全角カタカナのみで入力してください')
     end
   end
 end
