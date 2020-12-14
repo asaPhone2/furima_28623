@@ -6,9 +6,8 @@ class User < ApplicationRecord
 
     validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
    
-    with_options format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]{6,}+\z/i } do
-      validates :password
-      validates :password_confirmation
+    with_options format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze} do
+      validates :password  
     end
 
     with_options presence: true do
