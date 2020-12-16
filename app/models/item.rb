@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   validates :item_condition_id, presence:true
   validates :delivery_fee_id, presence:true
   validates :prefecture_code_id, presence:true
-  validates :preparation_day_id presence:true
+  validates :preparation_day_id, presence:true
 
   validates_associated :item_imgs
   validates :item_imgs, presence:true
