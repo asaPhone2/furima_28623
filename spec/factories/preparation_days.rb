@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :preparetion_day do
+  factory :preparation_day do
     
   end
 end
