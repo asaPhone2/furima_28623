@@ -29,31 +29,31 @@ RSpec.describe Item, type: :model do
     it 'categoryがない場合は登録できないこと' do
       @item.category_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category can't be blank")
+      expect(@item.errors.full_messages).to include("Category is not a number")
     end
 
     it 'item_conditionの選択がない場合は登録できないこと' do
       @item.item_condition_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Item condition can't be blank")
+      expect(@item.errors.full_messages).to include("Item condition is not a number")
     end
 
     it 'delivery_feeの選択がない場合は登録できないこと' do
       @item.delivery_fee_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
+      expect(@item.errors.full_messages).to include("Delivery fee is not a number")
     end
 
     it 'prefecture_codeの選択がない場合は登録できないこと' do
       @item.prefecture_code_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Prefecture code can't be blank")
+      expect(@item.errors.full_messages).to include("Prefecture code is not a number")
     end
 
     it 'preparation_dayの選択がない場合は登録できないこと' do
       @item.preparation_day_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Preparation day can't be blank")
+      expect(@item.errors.full_messages).to include("Preparation day is not a number")
     end
 
     it 'priceの入力がない場合は登録できないこと' do
@@ -63,13 +63,13 @@ RSpec.describe Item, type: :model do
     end
 
     it 'priceが¥300未満であれば登録できない' do
-      @item.price = '299'
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
     end
 
     it 'priceが¥10,000,000以上であれば登録できない' do
-      @item.price = '10000000'
+      @item.price = 10_000_000
       @item.valid?
       expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
     end

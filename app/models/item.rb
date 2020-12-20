@@ -1,14 +1,17 @@
 class Item < ApplicationRecord
-  has_one_attached :image
+  with_options presence: true do
+    validates :name
+    validates :introduction
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }, format: { with: /\A[0-9]+\z/ }
+  end
 
-  validates :name, presence: true
-  validates :introduction, presence: true
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }, format: { with: /\A[0-9]+\z/ }
-  validates :category_id, presence: true
-  validates :item_condition_id, presence: true
-  validates :delivery_fee_id, presence: true
-  validates :prefecture_code_id, presence: true
-  validates :preparation_day_id, presence: true
+  with_options numericality: { only_integer: true, greater_than: 0 } do
+    validates :category_id
+    validates :item_condition_id
+    validates :delivery_fee_id
+    validates :prefecture_code_id
+    validates :preparation_day_id
+  end
 
   validates_associated :image
   validates :image, presence: true
