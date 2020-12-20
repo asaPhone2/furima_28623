@@ -3,6 +3,7 @@ class Item < ApplicationRecord
     validates :name
     validates :introduction
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }, format: { with: /\A[0-9]+\z/ }
+    validates :image
   end
 
   with_options numericality: { only_integer: true, greater_than: 1 } do
@@ -14,10 +15,9 @@ class Item < ApplicationRecord
   end
 
   validates_associated :image
-  validates :image, presence: true
 
   # has_one :purchase_history
-  # belongs_to :user
+  belongs_to :user
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions

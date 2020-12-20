@@ -9,6 +9,6 @@ FactoryBot.define do
     delivery_fee_id    { 2 }
     category_id        { 2 }
 
-    # association :user
+    association :user
   end
 end
