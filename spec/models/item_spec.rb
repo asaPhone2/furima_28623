@@ -27,33 +27,33 @@ RSpec.describe Item, type: :model do
     end
 
     it 'categoryがない場合は登録できないこと' do
-      @item.category_id = nil
+      @item.category_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Category is not a number")
+      expect(@item.errors.full_messages).to include("Category must be greater than 1")
     end
 
     it 'item_conditionの選択がない場合は登録できないこと' do
-      @item.item_condition_id = nil
+      @item.item_condition_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Item condition is not a number")
+      expect(@item.errors.full_messages).to include("Item condition must be greater than 1")
     end
 
     it 'delivery_feeの選択がない場合は登録できないこと' do
-      @item.delivery_fee_id = nil
+      @item.delivery_fee_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery fee is not a number")
+      expect(@item.errors.full_messages).to include("Delivery fee must be greater than 1")
     end
 
     it 'prefecture_codeの選択がない場合は登録できないこと' do
-      @item.prefecture_code_id = nil
+      @item.prefecture_code_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Prefecture code is not a number")
+      expect(@item.errors.full_messages).to include("Prefecture code must be greater than 1")
     end
 
     it 'preparation_dayの選択がない場合は登録できないこと' do
-      @item.preparation_day_id = nil
+      @item.preparation_day_id = 1
       @item.valid?
-      expect(@item.errors.full_messages).to include("Preparation day is not a number")
+      expect(@item.errors.full_messages).to include("Preparation day must be greater than 1")
     end
 
     it 'priceの入力がない場合は登録できないこと' do

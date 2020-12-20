@@ -5,7 +5,7 @@ class Item < ApplicationRecord
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }, format: { with: /\A[0-9]+\z/ }
   end
 
-  with_options numericality: { only_integer: true, greater_than: 0 } do
+  with_options numericality: { only_integer: true, greater_than: 1 } do
     validates :category_id
     validates :item_condition_id
     validates :delivery_fee_id
@@ -27,5 +27,4 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture_code
   belongs_to_active_hash :preparation_day
 
-  validates :image, presence: true
 end
