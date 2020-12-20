@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
     end
-    
+
     context 'ユーザー新規登録ができない時' do
       it 'nicknameがない場合は登録できないこと' do
         @user.nickname = nil
@@ -72,59 +72,59 @@ RSpec.describe User, type: :model do
         @user.save
         another_user = FactoryBot.build(:user, email: 'kkkgmail')
         another_user.valid?
-        expect(another_user.errors[:email]).to include("is invalid")
+        expect(another_user.errors[:email]).to include('is invalid')
       end
 
       it '重複したemailが存在する場合は登録できない' do
         @user.save
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
 
       it ' passwordが5文字以下であれば登録できない' do
         @user.password = '12345'
         @user.password_confirmation = '12345'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
-      it "passwordが数字のみの場合は登録できない" do
+      it 'passwordが数字のみの場合は登録できない' do
         @user.password = '1234567'
         @user.password_confirmation = '1234567'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
-  
-      it "passwordが英文字のみの場合は登録できない" do
+
+      it 'passwordが英文字のみの場合は登録できない' do
         @user.password = 'abcdefg'
         @user.password_confirmation = 'abcdefg'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
 
-      it "family_nameが数字を含む場合登録できない" do
+      it 'family_nameが数字を含む場合登録できない' do
         @user.family_name = '123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name is invalid")
+        expect(@user.errors.full_messages).to include('Family name is invalid')
       end
 
-      it "first_nameが数字を含む場合登録できない" do
+      it 'first_nameが数字を含む場合登録できない' do
         @user.first_name = '123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid" )
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
 
-      it "first_name_kanaが数字を含む場合登録できない" do
+      it 'first_name_kanaが数字を含む場合登録できない' do
         @user.first_name_kana = '123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name kana is invalid")
+        expect(@user.errors.full_messages).to include('First name kana is invalid')
       end
 
-      it "family_name_kanaが数字を含む場合登録できない" do
+      it 'family_name_kanaが数字を含む場合登録できない' do
         @user.family_name_kana = '123'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Family name kana is invalid")
+        expect(@user.errors.full_messages).to include('Family name kana is invalid')
       end
     end
   end
