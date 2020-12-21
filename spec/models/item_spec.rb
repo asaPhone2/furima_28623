@@ -7,7 +7,6 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品出品機能' do
-
     context '商品出品ができる時' do
       it '全ての入力条件を満たしたら送信できること' do
         expect(@item).to be_valid
@@ -30,31 +29,31 @@ RSpec.describe Item, type: :model do
       it 'categoryがない場合は登録できないこと' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be greater than 1")
+        expect(@item.errors.full_messages).to include('Category must be greater than 1')
       end
 
       it 'item_conditionの選択がない場合は登録できないこと' do
         @item.item_condition_id = 1
         @item.valid?
-       expect(@item.errors.full_messages).to include("Item condition must be greater than 1")
+        expect(@item.errors.full_messages).to include('Item condition must be greater than 1')
       end
 
       it 'delivery_feeの選択がない場合は登録できないこと' do
         @item.delivery_fee_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery fee must be greater than 1")
+        expect(@item.errors.full_messages).to include('Delivery fee must be greater than 1')
       end
 
       it 'prefecture_codeの選択がない場合は登録できないこと' do
         @item.prefecture_code_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture code must be greater than 1")
+        expect(@item.errors.full_messages).to include('Prefecture code must be greater than 1')
       end
 
       it 'preparation_dayの選択がない場合は登録できないこと' do
         @item.preparation_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Preparation day must be greater than 1")
+        expect(@item.errors.full_messages).to include('Preparation day must be greater than 1')
       end
 
       it 'priceの入力がない場合は登録できないこと' do
@@ -82,21 +81,21 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが英数字混合では登録できない' do
-        @item.price = "1a23"
+        @item.price = '1a23'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが半角英語だけでは登録できない' do
-        @item.price = "aaa"
+        @item.price = 'aaa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
-      it "ユーザーが紐付いていないと出品できない" do
+      it 'ユーザーが紐付いていないと出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
 
       it '画像がない場合は登録できないこと' do

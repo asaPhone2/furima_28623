@@ -26,5 +26,4 @@ class Item < ApplicationRecord
   belongs_to_active_hash :item_condition
   belongs_to_active_hash :prefecture_code
   belongs_to_active_hash :preparation_day
-
 end
