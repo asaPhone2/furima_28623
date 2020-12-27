@@ -84,7 +84,7 @@ app/assets/stylesheets/items/new.css %>
             発送までの日数
             <span class="indispensable">必須</span>
           </div>
-          <%= f.collection_select(:preparetion_day_id, PreparationDay.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+          <%= f.collection_select(:preparation_day_id, PreparationDay.all, :id, :name, {}, {class:"select-box", id:"item-scheduled-delivery"}) %>
         </div>
       </div>
       <%# /配送について %>
@@ -141,8 +141,8 @@ app/assets/stylesheets/items/new.css %>
       <%# /注意書き %>
       <%# 下部ボタン %>
       <div class="sell-btn-contents">
-        <%= f.submit "変更する" ,class:"sell-btn" %>
-        <%=link_to 'もどる', "#", class:"back-btn" %>
+        <%= f.submit "変更する",class:"sell-btn" %>
+        <%=link_to 'もどる', item_path, class:"back-btn" %>
       </div>
       <%# /下部ボタン %>
     <% end %>
