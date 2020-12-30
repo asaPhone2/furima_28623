@@ -62,7 +62,7 @@ Things you may want to cover:
 - belongs_to :user
 - has_one :purchase_history
 
-## purchase_histry テーブル
+## history テーブル
 
 | Column | Type       | Options                       |
 | ------ | ---------- | ----------------------------- |
@@ -72,7 +72,7 @@ Things you may want to cover:
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one : senging_destination
+- has_one :senging_destination
 
 
 ### sending_destinations テーブル
@@ -88,4 +88,4 @@ Things you may want to cover:
 | purchase_history      | references | null: false ,foreign_key: true|
 
 ### Association
-- belongs_to :purchase_history
+- belongs_to :history
