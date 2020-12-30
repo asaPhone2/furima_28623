@@ -4,4 +4,8 @@ Rails.application.routes.draw do
  
   resources :items
 
+  resources :items do
+    resources :orders
+  end
+
 end
