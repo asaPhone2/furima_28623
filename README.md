@@ -62,7 +62,7 @@ Things you may want to cover:
 - belongs_to :user
 - has_one :purchase_history
 
-## history テーブル
+## order テーブル
 
 | Column | Type       | Options                       |
 | ------ | ---------- | ----------------------------- |
