@@ -1,10 +1,12 @@
 class OrdersController < ApplicationController
 
   def index
+    @item = Item.find(params[:item_id])
     @form = Form.new
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @form = Form.new(form_params)
     if @form.valid?
       @form.save
