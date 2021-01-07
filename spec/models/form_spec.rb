@@ -42,6 +42,24 @@ RSpec.describe Form, type: :model do
         @form.valid?
         expect(@form.errors.full_messages).to include("Phone number can't be blank", "Phone number is invalid")
       end
+
+      it 'ユーザーが紐付いていないと出品できない' do
+        @form.user_id = nil
+        @form.valid?
+        expect(@form.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'アイテムが紐付いていないと出品できない' do
+        @form.item_id = nil
+        @form.valid?
+        expect(@form.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @form.token = nil
+        @form.valid?
+        expect(@form.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
