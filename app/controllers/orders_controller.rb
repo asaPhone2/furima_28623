@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @form = Form.new(form_params)
     if @form.valid?
+      pay_item
       @form.save
       redirect_to root_path
     else
@@ -22,8 +23,16 @@ class OrdersController < ApplicationController
   private
   
   def form_params
-    params.require(:form).permit(:post_code, :prefecture_code_id, :city, :house_number, :bilding_number, :phone_number, :purchase_history).merge(user_id: current_user.id,item_id: params[:item_id])
+    params.require(:form).permit(:post_code, :prefecture_code_id, :city, :house_number, :bilding_number, :phone_number, :purchase_history).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
   end
 
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: form_params[:token],
+      currency: 'jpy'
+    )
+  end
 
 end
