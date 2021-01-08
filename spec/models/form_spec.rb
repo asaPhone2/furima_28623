@@ -2,12 +2,22 @@ require 'rails_helper'
 
 RSpec.describe Form, type: :model do
   before do
-    @form = FactoryBot.build(:form)
+    @item = FactoryBot.build(:item)
+    @item.image = fixture_file_upload('app/assets/images/flag.png')
+    @item.save
+    @user = FactoryBot.create(:user)
+    sleep 1
+    @form = FactoryBot.build(:form, user_id: @user.id,item_id: @item.id)
   end
 
   describe '商品購入機能' do
     context '商品が購入できる時' do
       it '全ての入力条件を満たしたら送信できること' do
+        expect(@form).to be_valid
+      end
+
+      it 'bilding_numberが抜けていても送信できること' do
+        @form.bilding_number = nil
         expect(@form).to be_valid
       end
     end
@@ -60,6 +70,25 @@ RSpec.describe Form, type: :model do
         @form.valid?
         expect(@form.errors.full_messages).to include("Token can't be blank")
       end
+
+      it "郵便番号はハイフン無しでは登録できないこと" do
+        @form.post_code = 1111111
+        @form.valid?
+        expect(@form.errors.full_messages).to include("Post code is invalid")
+      end
+
+      it "電話番号が12桁以上では登録できないこと" do
+        @form.phone_number = 000000000000
+        @form.valid?
+        expect(@form.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it "電話番号が英数混合では登録できないこと" do
+        @form.phone_number = "0a0000000000"
+        @form.valid?
+        expect(@form.errors.full_messages).to include("Phone number is invalid")
+      end
     end
+
   end
 end

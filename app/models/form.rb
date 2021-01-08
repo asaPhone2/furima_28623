@@ -13,8 +13,6 @@ class Form
     validates :user_id
     validates :item_id
   end
-  # belongs_to :user
-  # belongs_to :item
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
