@@ -41,7 +41,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_many :purchase_histories
+- has_many :order
 
 
 ## items テーブル
@@ -60,9 +60,9 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :user
-- has_one :purchase_history
+- has_one :order
 
-## purchase_histry テーブル
+## order テーブル
 
 | Column | Type       | Options                       |
 | ------ | ---------- | ----------------------------- |
@@ -72,7 +72,7 @@ Things you may want to cover:
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one : senging_destination
+- has_one :senging_destination
 
 
 ### sending_destinations テーブル
@@ -85,7 +85,7 @@ Things you may want to cover:
 | house_number          | string     | null: false |
 | bilding_number        | string     |             |
 | phone_number          | string     | null: false |
-| purchase_history      | references | null: false ,foreign_key: true|
+| order                 | references | null: false ,foreign_key: true|
 
 ### Association
-- belongs_to :purchase_history
+- belongs_to :order
