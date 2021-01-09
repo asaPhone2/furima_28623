@@ -72,13 +72,13 @@ RSpec.describe Form, type: :model do
       end
 
       it "郵便番号はハイフン無しでは登録できないこと" do
-        @form.post_code = 1111111
+        @form.post_code = '1111111'
         @form.valid?
         expect(@form.errors.full_messages).to include("Post code is invalid")
       end
 
       it "電話番号が12桁以上では登録できないこと" do
-        @form.phone_number = 000000000000
+        @form.phone_number = '000000000000'
         @form.valid?
         expect(@form.errors.full_messages).to include("Phone number is invalid")
       end
