@@ -3,6 +3,11 @@ class OrdersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @form = Form.new
+    if current_user == @item.user
+      redirect_to root_path
+    elsif @item.order.present?
+      redirect_to root_path
+    end
   end
 
   def create
