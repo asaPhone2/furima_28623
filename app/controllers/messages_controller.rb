@@ -3,6 +3,9 @@ class MessagesController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @message = Message.create(message_params)
+    if @message.save
+      ActionCable.server.broadcast 'message_channel', content: @message
+    end
     redirect_to item_path(@item.id)
   end
 
